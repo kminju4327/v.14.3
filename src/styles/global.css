@@ -1,0 +1,272 @@
+/* ════════════════════════════════════════════════════════════════
+   디자인 토큰 및 CSS 변수
+   ════════════════════════════════════════════════════════════════ */
+:root {
+  /* 배경색 */
+  --bg-app: #f5f4f1;
+  --bg-surface: #ffffff;
+  --bg-subtle: #f8f7f4;
+  --bg-muted: #efede8;
+  --bg-overlay: rgba(31, 29, 26, 0.5);
+
+  /* 텍스트색 */
+  --text-primary: #25231f;
+  --text-secondary: #6c6861;
+  --text-muted: #969188;
+  --text-inverse: #ffffff;
+
+  /* 테두리 */
+  --border-default: #dedbd4;
+  --border-soft: #e9e6df;
+  --border-focus: #a5875c;
+
+  /* 브랜드색 */
+  --brand-primary: #302d28;
+  --brand-primary-hover: #1f1d1a;
+  --brand-primary-light: #4a4741;
+  --brand-accent: #a5875c;
+  --brand-accent-soft: #eee7dc;
+  --brand-accent-lighter: #f5f0e8;
+
+  /* 상태색 */
+  --success: #44735b;
+  --success-light: #e8f3ef;
+  --warning: #9b6a2f;
+  --warning-light: #f5ede3;
+  --danger: #a64b46;
+  --danger-light: #f5e8e7;
+  --info: #5a7a8c;
+  --info-light: #e8eef3;
+
+  /* 반경 */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
+
+  /* 그림자 */
+  --shadow-sm: 0 1px 3px rgba(31, 29, 26, 0.05);
+  --shadow-md: 0 4px 12px rgba(31, 29, 26, 0.08);
+  --shadow-lg: 0 8px 24px rgba(31, 29, 26, 0.1);
+  --shadow-focus: 0 0 0 3px rgba(165, 135, 92, 0.1);
+
+  /* 타이포그래피 */
+  --font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-base: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 28px;
+  --font-size-4xl: 32px;
+
+  --line-height-tight: 1.3;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.7;
+
+  /* 간격 */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+
+  /* 전환 */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 250ms ease-in-out;
+
+  /* 최대 폭 */
+  --max-width-sm: 640px;
+  --max-width-md: 1024px;
+  --max-width-lg: 1280px;
+  --max-width-xl: 1440px;
+}
+
+/* 전역 리셋 및 기본 스타일 */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+  background-color: var(--bg-app);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 로딩 스피너 애니메이션 (인라인 style에서 className="spin" 으로 사용) */
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 반응형: 좁은 화면에서는 좌/우 2단 레이아웃을 세로로 쌓음 */
+@media (max-width: 720px) {
+  .app-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   버튼 스타일
+   ════════════════════════════════════════════════════════════════ */
+button, input[type="button"], input[type="submit"] {
+  font-family: var(--font-family);
+  transition: all var(--transition-fast);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   입력 필드 스타일
+   ════════════════════════════════════════════════════════════════ */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea,
+select {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-default);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--brand-accent);
+  box-shadow: var(--shadow-focus);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   카드 스타일
+   ════════════════════════════════════════════════════════════════ */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-lg);
+  transition: all var(--transition-normal);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   로딩 스피너
+   ════════════════════════════════════════════════════════════════ */
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   반응형 레이아웃
+   ════════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .app-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --spacing-lg: 16px;
+    --font-size-base: 13px;
+    --font-size-md: 14px;
+    --font-size-lg: 16px;
+  }
+
+  input, textarea, select {
+    font-size: 16px;
+  }
+
+  /* 모바일 헤더 대응 */
+  header {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    height: 56px !important;
+  }
+
+  header > div:first-child {
+    gap: 8px !important;
+  }
+
+  /* 로고 및 버전 축소 */
+  header > div:first-child > div:first-child > div:first-child {
+    font-size: 14px !important;
+  }
+
+  /* 프로젝트명 축소 및 말줄임표 */
+  header > div:first-child > div:last-child {
+    max-width: 100px !important;
+    font-size: 13px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* 우측 버튼 영역 간격 축소 */
+  header > div:last-child {
+    gap: 8px !important;
+  }
+
+  /* 버튼 크기 축소 */
+  header button {
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+  }
+
+  /* 모바일 사이드바 숨김 */
+  .brand-sidebar {
+    display: none !important;
+  }
+
+  .app-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
